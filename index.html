@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>checking...</title>
+    <title>Redirecting...</title>
     <script>
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
 
-        fetch('redirects.json')
-            .then(response => response.json())
-            .then(data => {
-                const target = data[id];
-                if (target) {
-                    window.location.href = target;
-                } else {
-                    document.body.innerHTML = "Invalid QR Code ID";
-                }
-            });
+        // Mapping for QR IDs to URLs
+        const redirects = {
+            qr1: "https://target-url-for-qr1.com",
+            qr2: "https://target-url-for-qr2.com",
+            qr3: "https://target-url-for-qr3.com"
+        };
+
+        // Redirect to the URL if ID is valid
+        if (id && redirects[id]) {
+            window.location.href = redirects[id];
+        } else {
+            document.body.innerHTML = "Invalid QR Code ID";
+        }
     </script>
 </head>
 <body>

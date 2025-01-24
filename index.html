@@ -17,9 +17,18 @@
 
         // Redirect to the URL if ID is valid
         if (id && redirects[id]) {
-            window.location.href = redirects[id];
+            openInBrowser(redirects[id]);
         } else {
-            window.location.href = redirects["web"];
+            openInBrowser(redirects["web"]);
+        }
+
+        function openInBrowser(url) {
+            // Use the window.open method to enforce system browser behavior in some environments
+            const newWindow = window.open(url, '_system');
+            if (!newWindow) {
+                // Fallback for environments where window.open('_system') isn't supported
+                window.location.href = url;
+            }
         }
     </script>
 </head>
